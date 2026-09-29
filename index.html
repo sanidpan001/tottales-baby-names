@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TotTales — Baby Name Generator with Meanings, Origins & Parent-Name Blends</title>
+<meta name="description" content="TotTales is a free baby name generator with 190+ real names across 10 cultures, meanings on every card, parent-name blending, sibling-name matching, filters by gender, origin, letter and meaning, and a savable shortlist.">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --peach:#FFF1E6; --sage:#4E7A51; --sage-dark:#3C6140; --rose:#C98A8A;
+    --rose-deep:#B56F6F; --ink:#4A3728; --cream:#FFFDF8; --line:#EBD8BE;
+  }
+  body{ background:var(--peach); color:var(--ink);
+    font-family:"Trebuchet MS","Segoe UI",ui-rounded,system-ui,-apple-system,sans-serif; }
+  .font-story{ font-family:Georgia,"Palatino Linotype","Book Antiqua",serif; }
+  .card{ background:var(--cream); border:2px solid var(--line); border-radius:1.25rem;
+    box-shadow:0 6px 18px rgba(74,55,40,.08); }
+  .card-hover{ transition:transform .15s ease, box-shadow .15s ease; }
+  .card-hover:hover{ transform:translateY(-3px); box-shadow:0 12px 24px rgba(74,55,40,.14); }
+  .btn-sage{ background:var(--sage); color:#fff; border-radius:9999px; font-weight:700;
+    box-shadow:0 4px 0 var(--sage-dark); transition:all .12s ease; }
+  .btn-sage:hover{ background:var(--sage-dark); }
+  .btn-sage:active{ transform:translateY(3px); box-shadow:0 1px 0 var(--sage-dark); }
+  .btn-rose{ background:var(--rose); color:#fff; border-radius:9999px; font-weight:700;
+    box-shadow:0 4px 0 var(--rose-deep); transition:all .12s ease; }
+  .btn-rose:hover{ background:var(--rose-deep); }
+  .btn-rose:active{ transform:translateY(3px); box-shadow:0 1px 0 var(--rose-deep); }
+  .tab-btn{ border-radius:9999px; font-weight:700; padding:.55rem 1.1rem; border:2px solid var(--line);
+    background:#fff; color:var(--ink); cursor:pointer; transition:all .12s ease; white-space:nowrap; }
+  .tab-btn.active{ background:var(--sage); border-color:var(--sage); color:#fff; }
+  .field{ border:2px solid var(--line); border-radius:.9rem; background:#fff; padding:.55rem .8rem;
+    width:100%; color:var(--ink); }
+  .field:focus{ outline:2px solid var(--sage); outline-offset:1px; border-color:var(--sage); }
+  .tag{ font-size:.68rem; font-weight:700; letter-spacing:.04em; border-radius:9999px; padding:.15rem .6rem; }
+  .tag-origin{ background:#F3E7D3; color:#8A6A45; }
+  .tag-gender-boy{ background:#DCE9F7; color:#2F5D8A; }
+  .tag-gender-girl{ background:#F8DEE4; color:#A34A63; }
+  .tag-gender-unisex{ background:#E4E7F3; color:#5A5FA8; }
+  .faq-a{ display:none; } .faq-item.open .faq-a{ display:block; }
+  .faq-item.open .faq-chev{ transform:rotate(180deg); }
+  .faq-chev{ transition:transform .2s ease; }
+  .heart-btn.saved{ background:var(--rose) !important; color:#fff !important; border-color:var(--rose) !important; }
+  .no-print{ } 
+  @media print{ .no-print{ display:none !important; } }
+  .story-divider{ height:6px; border-radius:9999px;
+    background:repeating-linear-gradient(90deg,var(--rose) 0 18px,transparent 18px 30px,var(--sage) 30px 48px,transparent 48px 60px); }
+</style>
+</head>
+<body id="top" class="min-h-screen">
+
+<!-- ============ STICKY HEADER ============ -->
+<header class="sticky top-0 z-40 shadow-md" style="background:var(--cream); border-bottom:3px solid var(--line);">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 no-underline">
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full text-2xl" style="background:var(--rose);">📖</span>
+      <span class="font-story text-2xl font-bold" style="color:var(--sage);">TotTales</span>
+    </a>
+    <nav class="flex items-center gap-4 sm:gap-6 text-sm font-bold">
+      <a href="#top" class="hover:underline" style="color:var(--ink);">Home</a>
+      <a href="https://fixoraa.tech" class="hover:underline" style="color:var(--rose-deep);">More Tools</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="mx-auto max-w-6xl px-4 sm:px-6 pt-8 pb-2 text-center">
+  <h1 class="font-story text-4xl sm:text-5xl font-bold mb-3" style="color:var(--ink);">
+    Every Name Tells a <span style="color:var(--sage);">Story</span> 📚
+  </h1>
+  <p class="text-base sm:text-lg max-w-2xl mx-auto mb-4" style="color:#6B5340;">
+    TotTales helps you find the perfect baby name — browse 190+ real names from 10 cultures with
+    meanings on every card, blend mom &amp; dad's names into brand-new ones, and find a name that
+    harmonizes with your older child's.
+  </p>
+  <span class="inline-block tag text-sm px-4 py-1.5" style="background:var(--sage); color:#fff;">
+    ✨ Unlimited Free Usage — no signup, no paywall
+  </span>
+</section>
+
+<!-- ============ TOP AD ============ -->
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pt-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <div class="origin-top scale-[0.44] sm:scale-100 shrink-0">
+        <script>
+          atOptions = { 'key' : '4e68ac77881c17fe128a46565d9a4e8c', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+        </script>
+        <script src="https://www.highrevenueformat.com/4e68ac77881c17fe128a46565d9a4e8c/invoke.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN TOOL ============ -->
+<main class="mx-auto max-w-6xl px-4 sm:px-6 py-6">
+
+  <!-- Name of the Day -->
+  <div class="card p-5 sm:p-6 mb-6 flex flex-col sm:flex-row items-center gap-5">
+    <div class="w-16 h-16 rounded-full flex items-center justify-center text-3xl shrink-0" style="background:var(--rose);">🌟</div>
+    <div class="text-center sm:text-left flex-1">
+      <p class="text-xs font-bold uppercase tracking-widest" style="color:var(--rose-deep);">Name of the day</p>
+      <p class="font-story text-3xl font-bold" id="notdName" style="color:var(--ink);">—</p>
+      <p class="text-sm" id="notdMeta" style="color:#6B5340;">—</p>
+      <p class="text-sm italic mt-1" id="notdMeaning" style="color:#6B5340;">—</p>
+    </div>
+    <button id="notdSave" class="btn-rose px-5 py-2.5 text-sm">♡ Save</button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="flex gap-2 overflow-x-auto pb-2 mb-5 no-print" role="tablist" aria-label="TotTales modes">
+    <button class="tab-btn active" data-tab="browse" role="tab">🔍 Browse Names</button>
+    <button class="tab-btn" data-tab="blend" role="tab">💞 Name Blender</button>
+    <button class="tab-btn" data-tab="sibling" role="tab">👨‍👩‍👧 Sibling Match</button>
+    <button class="tab-btn" data-tab="shortlist" role="tab">💗 Shortlist <span id="shortlistCount" class="ml-1 tag" style="background:#fff;color:var(--rose-deep);">0</span></button>
+  </div>
+
+  <!-- ===== BROWSE TAB ===== -->
+  <section id="tab-browse" class="tab-panel">
+    <div class="grid lg:grid-cols-[300px_1fr] gap-5 items-start">
+      <!-- Filter panel -->
+      <aside class="card p-5">
+        <h2 class="font-story text-xl font-bold mb-4" style="color:var(--sage);">🪄 Storybook Filters</h2>
+
+        <p class="text-sm font-bold mb-2">Baby's gender</p>
+        <div class="flex flex-wrap gap-2 mb-4" id="genderGroup">
+          <label class="tag cursor-pointer border-2" style="border-color:var(--sage);"><input type="radio" name="gender" value="any" class="mr-1" checked>Any</label>
+          <label class="tag tag-gender-boy cursor-pointer border-2 border-transparent"><input type="radio" name="gender" value="boy" class="mr-1">Boy</label>
+          <label class="tag tag-gender-girl cursor-pointer border-2 border-transparent"><input type="radio" name="gender" value="girl" class="mr-1">Girl</label>
+          <label class="tag tag-gender-unisex cursor-pointer border-2 border-transparent"><input type="radio" name="gender" value="unisex" class="mr-1">Unisex</label>
+        </div>
+
+        <p class="text-sm font-bold mb-2">Origin / culture</p>
+        <div id="originGroup" class="grid grid-cols-2 gap-1.5 mb-4 text-sm"></div>
+
+        <label class="text-sm font-bold block mb-1" for="startsWith">Starts with letter</label>
+        <input id="startsWith" class="field mb-4" maxlength="1" placeholder="e.g. A" autocomplete="off">
+
+        <label class="text-sm font-bold block mb-1" for="meaningKw">Meaning contains</label>
+        <input id="meaningKw" class="field mb-4" placeholder="e.g. light, star, brave" autocomplete="off">
+
+        <p class="text-sm font-bold mb-2">Name length</p>
+        <div class="flex items-center gap-2 mb-5">
+          <select id="minLen" class="field" aria-label="Minimum length">
+            <option value="">Min</option>
+          </select>
+          <span class="font-bold">–</span>
+          <select id="maxLen" class="field" aria-label="Maximum length">
+            <option value="">Max</option>
+          </select>
+        </div>
+
+        <div class="flex gap-2">
+          <button id="applyFilters" class="btn-sage px-5 py-2.5 text-sm flex-1">Apply ✨</button>
+          <button id="resetFilters" class="tab-btn text-sm" title="Reset filters">↺</button>
+        </div>
+      </aside>
+
+      <!-- Results -->
+      <div>
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <p class="text-sm font-bold" id="resultCount" style="color:#6B5340;"></p>
+          <button id="shuffleBtn" class="btn-rose px-4 py-2 text-sm">🎲 Shuffle</button>
+        </div>
+        <div id="nameGrid" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLEND TAB ===== -->
+  <section id="tab-blend" class="tab-panel hidden">
+    <div class="card p-6 sm:p-8 max-w-3xl mx-auto">
+      <h2 class="font-story text-2xl font-bold mb-2 text-center" style="color:var(--sage);">💞 Parent-Name Blender</h2>
+      <p class="text-center text-sm mb-6" style="color:#6B5340;">
+        Enter two names — mom &amp; dad, grandparents, anyone you love — and TotTales weaves their
+        sounds into brand-new baby-name blends. <span class="italic">Try Sam + Annie → Annis!</span>
+      </p>
+      <div class="grid sm:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="text-sm font-bold block mb-1" for="parentA">First name</label>
+          <input id="parentA" class="field" placeholder="e.g. Sam" autocomplete="off">
+        </div>
+        <div>
+          <label class="text-sm font-bold block mb-1" for="parentB">Second name</label>
+          <input id="parentB" class="field" placeholder="e.g. Annie" autocomplete="off">
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center mb-6">
+        <label class="text-sm font-bold" for="blendGender">Baby's gender:</label>
+        <select id="blendGender" class="field sm:w-48">
+          <option value="any">Any</option><option value="boy">Boy</option>
+          <option value="girl">Girl</option><option value="unisex">Unisex</option>
+        </select>
+        <button id="blendBtn" class="btn-sage px-6 py-2.5 text-sm">Blend Names 💞</button>
+      </div>
+      <div id="blendResults" class="grid sm:grid-cols-2 gap-4"></div>
+      <p id="blendEmpty" class="hidden text-center text-sm py-6" style="color:#6B5340;">
+        Enter two names above and press <b>Blend Names</b> to see the magic. ✨
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SIBLING TAB ===== -->
+  <section id="tab-sibling" class="tab-panel hidden">
+    <div class="card p-6 sm:p-8 max-w-3xl mx-auto">
+      <h2 class="font-story text-2xl font-bold mb-2 text-center" style="color:var(--sage);">👨‍👩‍👧 Sibling-Name Matcher</h2>
+      <p class="text-center text-sm mb-6" style="color:#6B5340;">
+        Already have a little one? Enter their name and TotTales finds names with a matching
+        <b>origin</b>, <b>starting letter</b> and <b>rhythm</b> — so the sibset sounds like family.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 mb-6">
+        <input id="siblingName" class="field flex-1" placeholder="e.g. Aarav" autocomplete="off">
+        <select id="siblingGender" class="field sm:w-48">
+          <option value="any">New baby: any gender</option><option value="boy">New baby: boy</option>
+          <option value="girl">New baby: girl</option><option value="unisex">New baby: unisex</option>
+        </select>
+        <button id="siblingBtn" class="btn-sage px-6 py-2.5 text-sm">Find Matches 👶</button>
+      </div>
+      <div id="siblingResults" class="grid sm:grid-cols-2 gap-4"></div>
+      <p id="siblingEmpty" class="hidden text-center text-sm py-6" style="color:#6B5340;">
+        Enter your child's name above and press <b>Find Matches</b>. ✨
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SHORTLIST TAB ===== -->
+  <section id="tab-shortlist" class="tab-panel hidden">
+    <div class="card p-6 sm:p-8 max-w-3xl mx-auto">
+      <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+        <h2 class="font-story text-2xl font-bold" style="color:var(--sage);">💗 Your Shortlist</h2>
+        <div class="flex gap-2">
+          <button id="copyShortlist" class="btn-sage px-4 py-2 text-sm">📋 Copy list</button>
+          <button id="clearShortlist" class="tab-btn text-sm">Clear</button>
+        </div>
+      </div>
+      <p class="text-sm mb-5" style="color:#6B5340;">Saved in this browser — your favorites travel with you. 💌</p>
+      <div id="shortlistGrid" class="grid sm:grid-cols-2 gap-4"></div>
+      <p id="shortlistEmpty" class="text-center text-sm py-8" style="color:#6B5340;">
+        Nothing saved yet — tap the <b>♡</b> on any name card to start your shortlist. ✨
+      </p>
+      <p id="copyMsg" class="hidden text-center text-sm font-bold mt-4" style="color:var(--sage);">Copied to clipboard! 🎉</p>
+    </div>
+  </section>
+</main>
+
+<!-- ============ BOTTOM AD ============ -->
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pb-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="464498"></script>
+    </div>
+  </div>
+</div>
+
+<div class="story-divider mx-auto max-w-6xl px-4 sm:px-6"></div>
+<!-- ============ PURE LOGIC (extracted by tests via vm) ============ -->
+<script>
+/*__PURE_START__*/
+// TotTales pure logic — no DOM access. All functions are named and testable.
+// Name DB: {n:name, g:gender boy|girl|unisex, o:origin, m:meaning}
+var NAME_DB = [
+["Aarav","boy","Indian","peaceful sound"],["Vihaan","boy","Indian","dawn; first rays of the sun"],
+["Reyansh","boy","Indian","ray of light"],["Arjun","boy","Indian","bright; shining"],
+["Kabir","boy","Indian","great; powerful"],["Vivaan","boy","Indian","full of life"],
+["Advait","boy","Indian","non-dual; unique"],["Ishaan","boy","Indian","the sun; guardian"],
+["Dhruv","boy","Indian","the pole star; constant"],["Ayaan","boy","Indian","gift of God"],
+["Kiaan","boy","Indian","grace of God"],["Pranav","boy","Indian","sacred syllable Om; salutation"],
+["Vedant","boy","Indian","ultimate knowledge"],["Rudra","boy","Indian","the roarer; fierce"],
+["Zoya","girl","Indian","loving; caring"],["Myra","girl","Indian","extraordinary; sweet"],
+["Saanvi","girl","Indian","knowledge; goddess Lakshmi"],["Diya","girl","Indian","lamp; light"],
+["Anaya","girl","Indian","without a superior"],["Aadhya","girl","Indian","first power"],
+["Navya","girl","Indian","new; fresh"],["Ira","girl","Indian","earth; goddess of speech"],
+["Arya","unisex","Sanskrit","noble"],["Asha","girl","Sanskrit","hope; wish"],
+["Devi","girl","Sanskrit","goddess"],["Bodhi","unisex","Sanskrit","awakening; enlightenment"],
+["Kamala","girl","Sanskrit","lotus"],["Mira","girl","Sanskrit","sea; devotee"],
+["Tara","girl","Sanskrit","star"],["Anika","girl","Sanskrit","graceful; brilliant"],
+["Aditya","boy","Sanskrit","the sun"],["Veda","girl","Sanskrit","knowledge"],
+["Shanti","girl","Sanskrit","peace"],["Ravi","boy","Sanskrit","the sun"],
+["Kiran","unisex","Sanskrit","ray of light"],["Jai","boy","Sanskrit","victory"],
+["Jaya","girl","Sanskrit","victory"],["Padma","girl","Sanskrit","lotus"],
+["Uma","girl","Sanskrit","tranquility"],["Agni","unisex","Sanskrit","fire"],
+["Aruna","unisex","Sanskrit","dawn"],["Vimal","boy","Sanskrit","pure"],
+["Zayd","boy","Arabic","growth; increase"],["Layla","girl","Arabic","night"],
+["Omar","boy","Arabic","flourishing; long-lived"],["Amir","boy","Arabic","prince; commander"],
+["Zara","girl","Arabic","blooming flower"],["Noor","unisex","Arabic","light"],
+["Yasmin","girl","Arabic","jasmine flower"],["Tariq","boy","Arabic","morning star"],
+["Samir","boy","Arabic","companion in evening talk"],["Amira","girl","Arabic","princess"],
+["Khalil","boy","Arabic","friend"],["Farah","girl","Arabic","joy"],
+["Hassan","boy","Arabic","handsome; good"],["Aisha","girl","Arabic","alive; living"],
+["Yusuf","boy","Arabic","God increases"],["Fatima","girl","Arabic","one who abstains"],
+["Bilal","boy","Arabic","water; moisture"],["Safa","girl","Arabic","purity"],
+["Ibrahim","boy","Arabic","father of nations"],
+["Noah","unisex","Hebrew","rest; comfort"],["Ethan","boy","Hebrew","strong; firm"],
+["Eli","boy","Hebrew","ascended; high"],["Eve","girl","Hebrew","life"],
+["Sarah","girl","Hebrew","princess"],["David","boy","Hebrew","beloved"],
+["Daniel","boy","Hebrew","God is my judge"],["Gabriel","boy","Hebrew","God is my strength"],
+["Hannah","girl","Hebrew","grace"],["Leah","girl","Hebrew","weary; delicate"],
+["Miriam","girl","Hebrew","wished-for child"],["Isaac","boy","Hebrew","laughter"],
+["Jacob","boy","Hebrew","supplanter"],["Samuel","boy","Hebrew","God has heard"],
+["Naomi","girl","Hebrew","pleasantness"],["Abigail","girl","Hebrew","my father's joy"],
+["Ezra","unisex","Hebrew","help"],["Asher","boy","Hebrew","happy; blessed"],
+["Caleb","boy","Hebrew","whole heart"],["Jonah","boy","Hebrew","dove"],
+["Ruth","girl","Hebrew","friend"],["Esther","girl","Hebrew","star"],
+["Shiloh","unisex","Hebrew","tranquil"],["Talia","girl","Hebrew","dew from heaven"],
+["Adina","girl","Hebrew","delicate; slender"],
+["Olivia","girl","Latin","olive tree"],["Felix","boy","Latin","lucky; happy"],
+["Clara","girl","Latin","bright; clear"],["Marcus","boy","Latin","warlike"],
+["Lucia","girl","Latin","light"],["Julian","boy","Latin","youthful"],
+["Stella","girl","Latin","star"],["Victor","boy","Latin","conqueror"],
+["Aurora","girl","Latin","dawn"],["Luna","girl","Latin","moon"],
+["Silas","boy","Latin","wood; forest"],["Vera","girl","Latin","true"],
+["Benedict","boy","Latin","blessed"],["Cecilia","girl","Latin","heavenly"],
+["Dominic","boy","Latin","belonging to the Lord"],["Vivian","unisex","Latin","alive"],
+["Maximus","boy","Latin","greatest"],
+["Alexander","boy","Greek","defender of men"],["Sophia","girl","Greek","wisdom"],
+["Theodore","boy","Greek","gift of God"],["Chloe","girl","Greek","blooming"],
+["Penelope","girl","Greek","weaver"],["Atlas","boy","Greek","bearer of the heavens"],
+["Daphne","girl","Greek","laurel tree"],["Orion","boy","Greek","hunter"],
+["Iris","girl","Greek","rainbow"],["Zoe","girl","Greek","life"],
+["Elena","girl","Greek","bright; shining light"],["Hector","boy","Greek","holding fast"],
+["Callista","girl","Greek","most beautiful"],["Damian","boy","Greek","to tame; subdue"],
+["Helen","girl","Greek","torch; shining light"],["Niko","boy","Greek","victory of the people"],
+["Liam","boy","Celtic","strong-willed warrior"],["Aiden","boy","Celtic","little fire"],
+["Isla","girl","Celtic","island"],["Finn","boy","Celtic","fair; white"],
+["Maeve","girl","Celtic","intoxicating"],["Rowan","unisex","Celtic","little redhead"],
+["Quinn","unisex","Celtic","wisdom; chief"],["Declan","boy","Celtic","man of prayer"],
+["Saoirse","girl","Celtic","freedom"],["Cillian","boy","Celtic","little church"],
+["Niamh","girl","Celtic","bright"],["Ronan","boy","Celtic","little seal"],
+["Aoife","girl","Celtic","beauty"],["Callum","boy","Celtic","dove"],
+["Fiona","girl","Celtic","fair; white"],["Ewan","boy","Celtic","youth"],
+["Bridget","girl","Celtic","strength; exalted one"],["Kieran","boy","Celtic","little dark one"],
+["Siobhan","girl","Celtic","God is gracious"],
+["Ren","unisex","Japanese","lotus; love"],["Yuki","unisex","Japanese","snow; happiness"],
+["Haruto","boy","Japanese","sunlight; soaring"],["Sakura","girl","Japanese","cherry blossom"],
+["Kenji","boy","Japanese","strong; healthy"],["Aiko","girl","Japanese","beloved child"],
+["Hiro","boy","Japanese","generous; abundant"],["Yuna","girl","Japanese","kindness"],
+["Daiki","boy","Japanese","great glory"],["Hana","girl","Japanese","flower"],
+["Sora","unisex","Japanese","sky"],["Akira","unisex","Japanese","bright; clear"],
+["Mei","girl","Japanese","beautiful"],["Riku","boy","Japanese","land"],
+["Kaito","boy","Japanese","ocean; soar"],["Emi","girl","Japanese","beautiful blessing"],
+["Takeshi","boy","Japanese","warrior; strong"],
+["Zuri","girl","African","beautiful"],["Amara","girl","African","grace"],
+["Jabari","boy","African","brave"],["Nia","girl","African","purpose"],
+["Kofi","boy","African","born on Friday"],["Zola","girl","African","quiet; tranquil"],
+["Dakarai","boy","African","happiness"],["Eshe","girl","African","life"],
+["Kwame","boy","African","born on Saturday"],["Nala","girl","African","gift"],
+["Tendai","unisex","African","be thankful"],["Zanele","girl","African","we are enough"],
+["Sefu","boy","African","sword"],["Ayana","girl","African","beautiful flower"],
+["Ife","girl","African","love"],["Jelani","boy","African","mighty"],
+["Makena","girl","African","happy one"],["Omari","boy","African","God the highest"],
+["Folami","boy","African","respect and honor me"],
+["Ivan","boy","Slavic","God is gracious"],["Anastasia","girl","Slavic","resurrection"],
+["Dmitri","boy","Slavic","earth-lover"],["Mila","girl","Slavic","gracious; dear"],
+["Sasha","unisex","Slavic","defender"],["Natasha","girl","Slavic","birthday of the Lord"],
+["Boris","boy","Slavic","fighter"],["Sonya","girl","Slavic","wisdom"],
+["Nikolai","boy","Slavic","victory of the people"],["Katya","girl","Slavic","pure"],
+["Milena","girl","Slavic","gracious"],["Zoran","boy","Slavic","dawn"],
+["Vesna","girl","Slavic","spring"],["Luka","boy","Slavic","light"],
+["Nadia","girl","Slavic","hope"],["Irina","girl","Slavic","peace"],
+["Stefan","boy","Slavic","crown"],["Tatiana","girl","Slavic","fairy queen"],
+["Yuri","boy","Slavic","farmer"]
+];
+var ORIGINS = ["Indian","Sanskrit","Arabic","Hebrew","Latin","Greek","Celtic","Japanese","African","Slavic"];
+var GENDERS = ["boy","girl","unisex"];
+
+function capitalize(s){ if(!s) return s; return s.charAt(0).toUpperCase()+s.slice(1).toLowerCase(); }
+function isVowel(ch){ return "aeiou".indexOf(ch.toLowerCase())>=0; }
+
+// Rough syllable splitter: groups consonant-run + vowel-run.
+function syllabify(name){
+  var w = String(name||"").toLowerCase().replace(/[^a-z]/g,"");
+  if(!w) return [];
+  var syls=[], cur="";
+  for(var i=0;i<w.length;i++){
+    var ch=w[i], v=isVowel(ch);
+    if(v){ cur+=ch; syls.push(cur); cur=""; }
+    else { cur+=ch; }
+  }
+  if(cur){ if(syls.length) syls[syls.length-1]+=cur; else syls.push(cur); }
+  // merge tiny leading consonant clusters into following syllable pairs for longer names
+  return syls.filter(Boolean);
+}
+function syllableCount(name){ return syllabify(name).length; }
+
+function isPronounceable(s){
+  s=String(s||"").toLowerCase();
+  if(s.length<3||s.length>9) return false;
+  if(!/[aeiou]/.test(s)) return false;
+  if(/[bcdfghjklmnpqrstvwxz]{3}/.test(s)) return false;
+  if(/[aeiou]{3}/.test(s)) return false;
+  if(/^[^a-z]/.test(s)) return false;
+  return true;
+}
+function blendScore(s){
+  s=s.toLowerCase(); var score=0;
+  for(var i=0;i<s.length-1;i++){ if(isVowel(s[i])!==isVowel(s[i+1])) score++; }
+  if(/[aeiou]$/.test(s)) score+=1;             // ends on a vowel: softer
+  if(s.length>=4&&s.length<=7) score+=2;       // sweet-spot length
+  return score;
+}
+
+// Parent-name phonetic fusion. prefix(A)+suffix(B) and prefix(B)+suffix(A) over
+// several syllable split points. Deterministic. Returns top blends.
+function fuseNames(a,b,opts){
+  opts=opts||{};
+  var max=opts.count||12, gender=opts.gender||"any";
+  a=String(a||"").trim().toLowerCase().replace(/[^a-z]/g,"");
+  b=String(b||"").trim().toLowerCase().replace(/[^a-z]/g,"");
+  if(a.length<2||b.length<2) return [];
+  var out=[], seen={};
+  function consider(preA,sufB,preStr,sufStr,fromA,fromB){
+    var raw=(preA+sufB).toLowerCase();
+    if(!isPronounceable(raw)) return;
+    if(raw===a||raw===b) return;
+    if(seen[raw]) return;
+    seen[raw]=1;
+    var inLib=null;
+    for(var i=0;i<NAME_DB.length;i++){
+      if(NAME_DB[i][0].toLowerCase()===raw){ inLib={n:NAME_DB[i][0],g:NAME_DB[i][1],o:NAME_DB[i][2],m:NAME_DB[i][3]}; break; }
+    }
+    out.push({name:capitalize(raw), recipe:capitalize(preStr)+" + "+capitalize(sufStr),
+              from:[capitalize(fromA),capitalize(fromB)], inLibrary:inLib, score:blendScore(raw)});
+  }
+  var pairs=[[a,b],[b,a]];
+  for(var p=0;p<pairs.length;p++){
+    var A=pairs[p][0], B=pairs[p][1];
+    for(var i=1;i<A.length;i++){
+      for(var j=1;j<B.length;j++){
+        var pre=A.slice(0,i), suf=B.slice(j);
+        if(pre.length+suf.length<3||pre.length+suf.length>9) continue;
+        consider(pre,suf,pre,suf,A,B);
+      }
+    }
+  }
+  out.sort(function(x,y){ return y.score-x.score || x.name.localeCompare(y.name); });
+  // gender hint: feminine blends (ending in a vowel) suit girls, consonant endings suit boys
+  if(gender==="girl"||gender==="boy"){
+    var wantVowel=(gender==="girl");
+    out.sort(function(x,y){
+      var xv=isVowel(x.name.slice(-1))?1:0, yv=isVowel(y.name.slice(-1))?1:0;
+      var xd=wantVowel?xv:(1-xv), yd=wantVowel?yv:(1-yv);
+      return (yd-xd) || (y.score-x.score) || x.name.localeCompare(y.name);
+    });
+  }
+  return out.slice(0,max);
+}
+
+// Multi-filter search over the DB. All filters optional.
+function filterNames(filters){
+  filters=filters||{};
+  var gender=filters.gender||"any";
+  var origins=filters.origins||[];
+  var startsWith=String(filters.startsWith||"").trim().toLowerCase();
+  var kw=String(filters.meaningKeyword||"").trim().toLowerCase();
+  var minL=filters.minLen?parseInt(filters.minLen,10):0;
+  var maxL=filters.maxLen?parseInt(filters.maxLen,10):99;
+  return NAME_DB.filter(function(e){
+    var n=e[0], g=e[1], o=e[2], m=e[3];
+    if(gender!=="any"&&g!==gender) return false;
+    if(origins.length&&origins.indexOf(o)<0) return false;
+    if(startsWith&&n.charAt(0).toLowerCase()!==startsWith.charAt(0)) return false;
+    if(kw&&m.toLowerCase().indexOf(kw)<0) return false;
+    if(n.length<minL||n.length>maxL) return false;
+    return true;
+  }).map(function(e){ return {n:e[0],g:e[1],o:e[2],m:e[3]}; });
+}
+
+// Fisher-Yates with injected randomness (pure & testable).
+function shuffleWith(arr, rand){
+  var a=arr.slice(), r=rand||Math.random;
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(r()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+
+// Sibling-name matcher: same origin / same starting letter / same rhythm.
+function siblingMatch(siblingName, opts){
+  opts=opts||{};
+  var max=opts.count||12, gender=opts.gender||"any";
+  var sib=String(siblingName||"").trim();
+  if(sib.length<2) return [];
+  var sibLower=sib.toLowerCase();
+  var sibEntry=null;
+  for(var i=0;i<NAME_DB.length;i++){ if(NAME_DB[i][0].toLowerCase()===sibLower){ sibEntry=NAME_DB[i]; break; } }
+  var sibOrigin=sibEntry?sibEntry[2]:null;
+  var sibGender=sibEntry?sibEntry[1]:null;
+  var sibSyl=syllableCount(sib);
+  var scored=NAME_DB.map(function(e){
+    var n=e[0], g=e[1], o=e[2], score=0, reasons=[];
+    if(n.toLowerCase()===sibLower) return null;
+    if(gender!=="any"&&g!==gender) return null;
+    if(sibOrigin&&o===sibOrigin){ score+=3; reasons.push("same "+o+" origin"); }
+    if(n.charAt(0).toLowerCase()===sibLower.charAt(0)){ score+=2; reasons.push("same starting letter"); }
+    if(Math.abs(syllableCount(n)-sibSyl)===0){ score+=2; reasons.push("same rhythm ("+sibSyl+" syllables)"); }
+    else if(Math.abs(syllableCount(n)-sibSyl)===1){ score+=1; }
+    if(Math.abs(n.length-sib.length)<=1){ score+=1; reasons.push("similar length"); }
+    if(sibGender&&g===sibGender){ score+=1; }
+    if(isVowel(n.slice(-1))===isVowel(sib.slice(-1))){ score+=1; reasons.push("matching ending sound"); }
+    return {n:n,g:g,o:o,m:e[3],score:score,reasons:reasons};
+  }).filter(Boolean);
+  scored.sort(function(x,y){ return y.score-x.score || x.n.localeCompare(y.n); });
+  return scored.slice(0,max);
+}
+
+// Deterministic "name of the day" from a date string (YYYY-MM-DD).
+function nameOfTheDay(dateStr){
+  var s=String(dateStr||""), h=0;
+  for(var i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; }
+  var e=NAME_DB[h%NAME_DB.length];
+  return {n:e[0],g:e[1],o:e[2],m:e[3]};
+}
+
+// Shortlist list ops (pure; storage is handled by UI code).
+function shortlistAdd(list, entry){
+  var key=entry.n.toLowerCase();
+  if(list.some(function(e){ return e.n.toLowerCase()===key; })) return list.slice();
+  return list.concat([entry]);
+}
+function shortlistRemove(list, name){
+  var key=String(name).toLowerCase();
+  return list.filter(function(e){ return e.n.toLowerCase()!==key; });
+}
+function shortlistText(list){
+  return list.map(function(e,idx){ return (idx+1)+". "+e.n+" — "+e.m+" ("+e.o+", "+e.g+")"; }).join("\n");
+}
+/*__PURE_END__*/
+</script>
+<!-- ============ UI WIRING (DOM) ============ -->
+<script>
+(function(){
+  "use strict";
+  var $=function(id){ return document.getElementById(id); };
+  var LS_KEY="tottales-shortlist-v1";
+
+  function loadShortlist(){
+    try{ var raw=localStorage.getItem(LS_KEY); if(!raw) return [];
+      var arr=JSON.parse(raw); return Array.isArray(arr)?arr:[]; }catch(e){ return []; }
+  }
+  function saveShortlist(list){ try{ localStorage.setItem(LS_KEY, JSON.stringify(list)); }catch(e){} }
+  var shortlist=loadShortlist();
+
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+  function isSaved(name){ return shortlist.some(function(e){ return e.n.toLowerCase()===name.toLowerCase(); }); }
+
+  function nameCard(e, extra){
+    var gid="tag-gender-"+e.g;
+    var heartCls=isSaved(e.n)?"heart-btn saved":"heart-btn";
+    var heartTxt=isSaved(e.n)?"♥ Saved":"♡ Save";
+    return '<div class="card card-hover p-4 flex flex-col gap-2">'
+      +'<div class="flex items-start justify-between gap-2">'
+      +'<h3 class="font-story text-2xl font-bold" style="color:var(--ink);">'+esc(e.n)+'</h3>'
+      +'<button class="'+heartCls+' tag border-2 shrink-0" style="border-color:var(--rose);color:var(--rose-deep);" data-save="'+esc(e.n)+'" aria-label="Save '+esc(e.n)+' to shortlist">'+heartTxt+'</button>'
+      +'</div>'
+      +'<p class="text-sm italic" style="color:#6B5340;">“'+esc(e.m)+'”</p>'
+      +'<div class="flex flex-wrap gap-1.5 mt-auto">'
+      +'<span class="tag tag-origin">'+esc(e.o)+'</span>'
+      +'<span class="tag '+gid+'">'+esc(e.g)+'</span>'
+      +(extra?'<span class="tag" style="background:#EAF3E4;color:var(--sage-dark);">'+esc(extra)+'</span>':"")
+      +'</div></div>';
+  }
+
+  function bindSaveButtons(root){
+    root.querySelectorAll("[data-save]").forEach(function(btn){
+      btn.onclick=function(){
+        var nm=btn.getAttribute("data-save");
+        var entry=findEntry(nm);
+        if(!entry) return;
+        if(isSaved(nm)){ shortlist=shortlistRemove(shortlist,nm); }
+        else{ shortlist=shortlistAdd(shortlist,entry); }
+        saveShortlist(shortlist); renderShortlist(); refreshHearts();
+      };
+    });
+  }
+  function findEntry(name){
+    for(var i=0;i<NAME_DB.length;i++){ var e=NAME_DB[i];
+      if(e[0].toLowerCase()===name.toLowerCase()) return {n:e[0],g:e[1],o:e[2],m:e[3]}; }
+    return {n:capitalize(name),g:"unisex",o:"Blend",m:"a brand-new blend, made with love"};
+  }
+  function refreshHearts(){
+    document.querySelectorAll("[data-save]").forEach(function(btn){
+      var nm=btn.getAttribute("data-save");
+      if(isSaved(nm)){ btn.classList.add("saved"); btn.textContent="♥ Saved"; }
+      else{ btn.classList.remove("saved"); btn.textContent="♡ Save"; }
+    });
+    $("shortlistCount").textContent=shortlist.length;
+  }
+
+  /* ---- tabs ---- */
+  document.querySelectorAll(".tab-btn[data-tab]").forEach(function(btn){
+    btn.onclick=function(){
+      document.querySelectorAll(".tab-btn[data-tab]").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+      document.querySelectorAll(".tab-panel").forEach(function(p){ p.classList.add("hidden"); });
+      $("tab-"+btn.getAttribute("data-tab")).classList.remove("hidden");
+    };
+  });
+
+  /* ---- filter controls ---- */
+  var og=$("originGroup");
+  ORIGINS.forEach(function(o){
+    var lab=document.createElement("label");
+    lab.className="flex items-center gap-1.5 cursor-pointer tag tag-origin";
+    lab.innerHTML='<input type="checkbox" value="'+o+'" class="accent-[#4E7A51]"> '+o;
+    og.appendChild(lab);
+  });
+  var minL=$("minLen"), maxL=$("maxLen");
+  for(var L=3;L<=12;L++){ minL.add(new Option(L,L)); maxL.add(new Option(L,L)); }
+
+  function currentFilters(){
+    var gender=(document.querySelector('input[name="gender"]:checked')||{}).value||"any";
+    var origins=Array.prototype.map.call(og.querySelectorAll("input:checked"),function(c){return c.value;});
+    return { gender:gender, origins:origins, startsWith:$("startsWith").value,
+             meaningKeyword:$("meaningKw").value, minLen:minL.value, maxLen:maxL.value };
+  }
+  var lastResults=[];
+  function renderBrowse(list){
+    lastResults=list;
+    var grid=$("nameGrid");
+    $("resultCount").textContent=list.length+" name"+(list.length===1?"":"s")+" found 📖";
+    if(!list.length){
+      grid.innerHTML='<div class="card p-8 text-center sm:col-span-2 xl:col-span-3">'
+        +'<p class="text-3xl mb-2">🦉</p><p class="font-bold mb-1">No names in this story chapter…</p>'
+        +'<p class="text-sm" style="color:#6B5340;">Try loosening a filter or two — every name deserves a tale.</p></div>';
+      return;
+    }
+    grid.innerHTML=list.map(function(e){ return nameCard(e); }).join("");
+    bindSaveButtons(grid);
+  }
+  function applyAndRender(){ renderBrowse(filterNames(currentFilters())); }
+  $("applyFilters").onclick=applyAndRender;
+  $("resetFilters").onclick=function(){
+    document.querySelector('input[name="gender"][value="any"]').checked=true;
+    og.querySelectorAll("input").forEach(function(c){ c.checked=false; });
+    $("startsWith").value=""; $("meaningKw").value=""; minL.value=""; maxL.value="";
+    applyAndRender();
+  };
+  $("shuffleBtn").onclick=function(){
+    renderBrowse(shuffleWith(lastResults.length?lastResults:filterNames(currentFilters())));
+  };
+
+  /* ---- name of the day ---- */
+  function renderNotd(){
+    var d=new Date(), ds=d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);
+    var e=nameOfTheDay(ds);
+    $("notdName").textContent=e.n;
+    $("notdMeta").textContent=e.o+" · "+e.g;
+    $("notdMeaning").textContent="“"+e.m+"”";
+    var btn=$("notdSave");
+    btn.onclick=function(){
+      if(!isSaved(e.n)){ shortlist=shortlistAdd(shortlist,e); saveShortlist(shortlist); refreshHearts(); renderShortlist(); }
+      btn.textContent="♥ Saved!"; setTimeout(function(){ btn.textContent="♡ Save"; },1500);
+    };
+  }
+
+  /* ---- blender ---- */
+  $("blendBtn").onclick=function(){
+    var a=$("parentA").value, b=$("parentB").value, g=$("blendGender").value;
+    var res=$("blendResults"), empty=$("blendEmpty");
+    if(a.trim().length<2||b.trim().length<2){
+      res.innerHTML=""; empty.classList.remove("hidden");
+      empty.innerHTML="Please enter <b>two names</b> (at least 2 letters each) to blend. 💞";
+      return;
+    }
+    var blends=fuseNames(a,b,{gender:g,count:12});
+    empty.classList.add("hidden");
+    if(!blends.length){
+      res.innerHTML='<div class="card p-6 text-center sm:col-span-2"><p class="font-bold mb-1">Hmm, no pronounceable blends…</p>'
+        +'<p class="text-sm" style="color:#6B5340;">Try different spellings or nicknames of the parent names.</p></div>';
+      return;
+    }
+    res.innerHTML=blends.map(function(bl){
+      var e=bl.inLibrary?bl.inLibrary:{n:bl.name,g:g==="any"?"unisex":g,o:"Blend",m:"a brand-new blend of "+bl.from[0]+" & "+bl.from[1]};
+      return nameCard(e, "💞 "+bl.recipe+(bl.inLibrary?" · real name!":""));
+    }).join("");
+    bindSaveButtons(res);
+  };
+
+  /* ---- sibling matcher ---- */
+  $("siblingBtn").onclick=function(){
+    var sib=$("siblingName").value, g=$("siblingGender").value;
+    var res=$("siblingResults"), empty=$("siblingEmpty");
+    if(sib.trim().length<2){
+      res.innerHTML=""; empty.classList.remove("hidden");
+      empty.innerHTML="Please enter your <b>child's name</b> (at least 2 letters). 👶";
+      return;
+    }
+    var matches=siblingMatch(sib,{gender:g,count:12});
+    empty.classList.add("hidden");
+    res.innerHTML=matches.map(function(mt){
+      return nameCard({n:mt.n,g:mt.g,o:mt.o,m:mt.m}, "✨ "+mt.reasons.slice(0,2).join(" · "));
+    }).join("");
+    bindSaveButtons(res);
+  };
+
+  /* ---- shortlist ---- */
+  function renderShortlist(){
+    var grid=$("shortlistGrid"), empty=$("shortlistEmpty");
+    $("shortlistCount").textContent=shortlist.length;
+    if(!shortlist.length){ grid.innerHTML=""; empty.classList.remove("hidden"); return; }
+    empty.classList.add("hidden");
+    grid.innerHTML=shortlist.map(function(e){
+      return '<div class="card card-hover p-4 flex flex-col gap-2">'
+        +'<div class="flex items-start justify-between gap-2">'
+        +'<h3 class="font-story text-2xl font-bold">'+esc(e.n)+'</h3>'
+        +'<button class="tag border-2 font-bold shrink-0" style="border-color:var(--rose);color:var(--rose-deep);" data-remove="'+esc(e.n)+'">✕</button>'
+        +'</div><p class="text-sm italic" style="color:#6B5340;">“'+esc(e.m)+'”</p>'
+        +'<div class="flex flex-wrap gap-1.5"><span class="tag tag-origin">'+esc(e.o)+'</span>'
+        +'<span class="tag tag-gender-'+esc(e.g)+'">'+esc(e.g)+'</span></div></div>';
+    }).join("");
+    grid.querySelectorAll("[data-remove]").forEach(function(btn){
+      btn.onclick=function(){
+        shortlist=shortlistRemove(shortlist,btn.getAttribute("data-remove"));
+        saveShortlist(shortlist); renderShortlist(); refreshHearts();
+      };
+    });
+  }
+  $("clearShortlist").onclick=function(){
+    shortlist=[]; saveShortlist(shortlist); renderShortlist(); refreshHearts();
+  };
+  $("copyShortlist").onclick=function(){
+    var msg=$("copyMsg");
+    if(!shortlist.length){ msg.textContent="Your shortlist is empty — save some names first! 💗"; }
+    else{
+      var txt="My TotTales baby-name shortlist 💗\n\n"+shortlistText(shortlist);
+      var done=function(){ msg.textContent="Copied to clipboard! 🎉"; };
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,done); }
+      else{ var ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta);
+        ta.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(ta); done(); }
+    }
+    msg.classList.remove("hidden"); setTimeout(function(){ msg.classList.add("hidden"); },2200);
+  };
+
+  /* ---- FAQ accordion ---- */
+  document.querySelectorAll(".faq-item").forEach(function(item){
+    item.querySelector(".faq-q").addEventListener("click",function(){ item.classList.toggle("open"); });
+  });
+
+  /* ---- init ---- */
+  renderNotd(); applyAndRender(); renderShortlist(); refreshHearts();
+})();
+</script>
+<!-- ============ SEO ARTICLE ============ -->
+<section class="mx-auto max-w-6xl px-4 sm:px-6 py-10">
+<article id="seo-article" class="card p-6 sm:p-10">
+<h2 class="font-story text-3xl font-bold mb-6" style="color:var(--sage);">The Complete Guide to Choosing the Perfect Baby Name</h2>
+
+<p class="mb-4">Choosing a baby name is one of the first great adventures of parenthood — and one of the most lasting. Long after the nursery is repainted and the tiny socks are outgrown, the name you choose will be spoken thousands of times: whispered at bedtime, called across playgrounds, printed on diplomas, and signed on first job applications. It is no wonder that expectant parents spend months browsing lists, debating with partners, and testing how a name sounds out loud. This guide walks you through everything that matters when choosing a baby name: meaning, origin, sound, sibling harmony, cultural roots, and the practical tests that separate a name you love on paper from one you will love for a lifetime.</p>
+
+<h3 class="font-story text-2xl font-bold mt-8 mb-3" style="color:var(--ink);">Why meaning matters more than you think</h3>
+<p class="mb-4">Every name carries a story. Aarav means "peaceful sound," Layla means "night," and Theodore means "gift of God." For many parents, the meaning is the deciding factor — it is the secret wish tucked inside the name, a blessing spoken every time the name is said. Studies in naming psychology consistently show that people feel a quiet connection to the meaning of their own name, even if they rarely think about it consciously. A name that means "brave," "light," or "beloved" becomes a tiny daily affirmation. When you browse names, read the meaning first and ask yourself: is this a story I want my child to carry? Some parents choose meanings that reflect their hopes (grace, strength, wisdom), others honor circumstances (a dawn baby named Aurora, a long-awaited child named Asha, "hope"). There is no wrong answer — but a meaningful name is rarely regretted.</p>
+
+<h3 class="font-story text-2xl font-bold mt-8 mb-3" style="color:var(--ink);">Origin and cultural roots: honoring where you come from</h3>
+<p class="mb-4">Names are passports to heritage. An Indian family might lean toward Aarav, Diya, or Kabir; a family with Irish roots might love Saoirse, Finn, or Maeve; Japanese heritage shines through Sakura, Ren, or Haruto. In our increasingly multicultural world, many families blend two or more traditions — and that is where origin filters become genuinely useful. Instead of scrolling through thousands of names alphabetically, filtering by origin lets you explore one cultural storybook at a time. Pay attention to how a name travels: some names, like Noah, Maya, or Elena, work beautifully across languages and continents, which matters if your family spans countries. Others are deeply rooted in one language's sounds and may be mispronounced elsewhere — which is fine if honoring heritage is your priority. Talk to grandparents, too: in many cultures, naming carries family expectations, from honoring ancestors to following religious traditions, and an early conversation prevents later friction.</p>
+
+<h3 class="font-story text-2xl font-bold mt-8 mb-3" style="color:var(--ink);">The sound test: say it, shout it, sing it</h3>
+<p class="mb-4">A name lives in sound. Before you commit, run the everyday tests. Say the full name out loud — first, middle, and last together — and listen for awkward rhythms or unintended rhymes. Shout it across the house as if calling a child for dinner. Whisper it as a bedtime lullaby. Check the initials: they should not spell anything unfortunate. Consider nicknames, because children and classmates will invent them whether you plan for them or not — if you love Benjamin but hate Ben, that tension will surface. Think about syllable flow with your surname: a long, multisyllabic surname often pairs best with a shorter first name, and vice versa. And test the name in the settings where it will actually be used: the doctor's waiting room, the classroom roll call, the job interview. A name that is easy to pronounce on first sight saves your child a lifetime of corrections — though a slightly unusual name, spelled intuitively, can be a wonderful distinctive gift.</p>
+
+<h3 class="font-story text-2xl font-bold mt-8 mb-3" style="color:var(--ink);">Sibling names: harmony without matching outfits</h3>
+<p class="mb-4">If this is not your first child, the new name joins an existing set — and names, like siblings, sound best in harmony. The classic advice from naming experts is that sibling names should feel stylistically related but distinct enough to avoid confusion. That usually means matching on one or two dimensions: the same cultural origin (Aarav and Anaya), the same starting letter (Mila and Milena), or the same rhythm and length (Liam and Noah). What you want to avoid is accidental comedy or confusion: rhyming names like Jayden and Kayden, or names so similar that teachers mix them up daily. A sibling-name matcher is useful here because it surfaces patterns you might not notice yourself — for instance, that your daughter Isla (island, Celtic, two syllables) pairs naturally with Finn, Rowan, or Maeve. Involve the older sibling in the process if they are old enough; children take enormous pride in helping name a new brother or sister, and it builds an early bond.</p>
+
+<h3 class="font-story text-2xl font-bold mt-8 mb-3" style="color:var(--ink);">Blending parent names: a modern tradition</h3>
+<p class="mb-4">One of the most delightful modern naming trends is the parent-name blend — weaving syllables from two parents' names into something brand new. Sam and Annie become Annis or Sannie; the result honors both parents at once, which is especially meaningful in blended families or when both partners want their identity reflected. The craft lies in the blending: take the opening sounds of one name and the ending sounds of the other, then test for pronounceability. Good blends alternate vowels and consonants smoothly, stay within a comfortable length, and do not accidentally echo either parent's full name. Some blends turn out to be real names already in use — a happy bonus, since it means the blend has stood the test of time. Others are entirely invented, which is fine too, as long as the spelling is intuitive. Try several split points: the first syllable of one name with the last syllable of the other usually works best, but reversing the order can produce a completely different and equally lovely result.</p>
+
+<h3 class="font-story text-2xl font-bold mt-8 mb-3" style="color:var(--ink);">Boy, girl, or unisex: thinking beyond tradition</h3>
+<p class="mb-4">Gendered naming conventions are loosening worldwide, and unisex names are having a well-deserved moment. Names like Rowan, Quinn, Noor, Arya, and Shiloh work beautifully regardless of gender, offering flexibility and a modern feel. There are practical considerations on both sides: a clearly gendered name can simplify paperwork and social expectations in traditional settings, while a unisex name gives your child room to define themselves. If you are keeping the baby's sex a surprise, building two shortlists — or focusing on unisex options — removes the guesswork. Whatever you choose, remember that trends cycle: today's "unusual" unisex choice is often tomorrow's classic. The Hundred-Year Rule of naming observes that names popular a century ago tend to feel fresh again, so a vintage revival like Clara, Felix, or Hazel can be both distinctive and timeless.</p>
+
+<h3 class="font-story text-2xl font-bold mt-8 mb-3" style="color:var(--ink);">Popularity: the sweet spot between unique and unpronounceable</h3>
+<p class="mb-4">Every parent wants a name that is special but not strange. The sweet spot is a name people recognize but do not hear every day — familiar enough to spell, rare enough to feel personal. Extremely popular names have a real cost: your child may share their name with three classmates, becoming "Emma S." for a decade. Extremely rare names have a different cost: constant spelling, pronunciation corrections, and the occasional raised eyebrow. National popularity lists are a helpful reality check — if a name sits in the top 20, expect company. Names ranked between 200 and 800 often hit the sweet spot of "I've heard it, it's lovely, and I don't know five of them." Also consider the trajectory: a name climbing fast may feel dated in ten years, while a slow, steady classic rarely does. And remember that popularity is local — a name common in one country can be refreshingly uncommon in another.</p>
+
+<h3 class="font-story text-2xl font-bold mt-8 mb-3" style="color:var(--ink);">Practical checks before you decide</h3>
+<p class="mb-4">Once your shortlist is down to a handful of favorites, run the final gauntlet. First, the playground test: imagine the name being called by a teacher, announced at a graduation, and introduced at a job interview — does it carry well in all three? Second, the digital test: search the exact name online to make sure it is not strongly associated with someone notorious, and check whether a reasonable domain or social handle is available if that matters to you. Third, the handwriting test: write it out — some beautiful names become illegible scribbles. Fourth, the family test: share your top two or three with trusted family members, but only when you are genuinely open to input; announcing a final decision as a decision ("her name is Diya") invites celebration rather than debate. Finally, the sleep test: live with each finalist for a few days. Refer to your bump or newborn by the name, and notice which one starts to feel inevitable. Parents frequently report that one name simply "clicks" — trust that feeling.</p>
+
+<h3 class="font-story text-2xl font-bold mt-8 mb-3" style="color:var(--ink);">Middle names, nicknames, and the art of the shortlist</h3>
+<p class="mb-4">Do not neglect the middle name — it is where you can be bold. A classic first name pairs wonderfully with a daring middle (Olivia Wren), and a distinctive first name is grounded by a traditional middle (Zephyr James). Middle names are also the perfect place for honor names that might feel heavy as a first name. As for nicknames, plan for the obvious ones but hold them lightly; the nickname your child actually gets will be chosen by life, not by you. The most powerful tool in the whole process is the humble shortlist. Keep a running list on your phone, add names the moment they strike you, and revisit it monthly — names you loved in the first trimester sometimes fade, while quiet contenders grow on you. Discuss the list with your partner regularly, and use a simple rule: each partner can veto, but neither can unilaterally choose. Naming is a duet, and the negotiation itself — what each of you loves and why — is one of the sweetest conversations of pregnancy.</p>
+
+<p class="mt-8 mb-2">At the end of the day, there is no perfect name — only the name that becomes perfect because it is <em>yours</em>. Whether you choose a name rich with heritage, a creative blend of two people you love, or a name that simply made you smile the first time you heard it, you are giving your child the first chapter of their story. Take your time, enjoy the browsing, and trust your heart. Happy naming! 💛</p>
+</article>
+
+<!-- ============ FAQs ============ -->
+<div class="mt-10">
+<h2 class="font-story text-3xl font-bold mb-6 text-center" style="color:var(--sage);">Frequently Asked Questions</h2>
+<div class="grid gap-3 max-w-4xl mx-auto">
+
+<div class="faq-item card p-5 cursor-pointer">
+  <div class="faq-q flex items-center justify-between gap-3 font-bold">
+    <span>How does the parent-name blender work?</span><span class="faq-chev">▾</span>
+  </div>
+  <p class="faq-a text-sm mt-3" style="color:#6B5340;">Enter two names — for example Sam and Annie — and TotTales combines the opening syllables of one name with the ending syllables of the other at several split points, in both orders. Each candidate is checked for pronounceability (alternating vowel-consonant sounds, no awkward triple consonants, comfortable length), scored for how naturally it flows, and the best blends are shown with their "recipe," like Sanie from "sa + nie." If a blend happens to be a real name in our library, we tell you — a nice bonus.</p>
+</div>
+
+<div class="faq-item card p-5 cursor-pointer">
+  <div class="faq-q flex items-center justify-between gap-3 font-bold">
+    <span>Are the name meanings accurate?</span><span class="faq-chev">▾</span>
+  </div>
+  <p class="faq-a text-sm mt-3" style="color:#6B5340;">Yes — every name in the TotTales library is a real, established name, and each meaning reflects its widely accepted etymology (for example, Sophia means "wisdom" in Greek, and Layla means "night" in Arabic). Many names have layered histories across languages, so we show the most commonly cited meaning. If a name's heritage is especially important to your family, it is always worth a final check with a native speaker or cultural source.</p>
+</div>
+
+<div class="faq-item card p-5 cursor-pointer">
+  <div class="faq-q flex items-center justify-between gap-3 font-bold">
+    <span>How does sibling-name matching work?</span><span class="faq-chev">▾</span>
+  </div>
+  <p class="faq-a text-sm mt-3" style="color:#6B5340;">Type in your existing child's name and TotTales scores every name in the library on family harmony: same cultural origin earns the most points, followed by the same starting letter, the same syllable rhythm, similar length, and a matching ending sound. If your child's name is in our library, we also match its gender style. Each suggestion shows exactly why it was picked — "same Indian origin · same starting letter" — so you can judge the fit yourself.</p>
+</div>
+
+<div class="faq-item card p-5 cursor-pointer">
+  <div class="faq-q flex items-center justify-between gap-3 font-bold">
+    <span>Which cultures and origins are covered?</span><span class="faq-chev">▾</span>
+  </div>
+  <p class="faq-a text-sm mt-3" style="color:#6B5340;">TotTales currently covers ten origins: Indian, Sanskrit, Arabic, Hebrew, Latin, Greek, Celtic, Japanese, African, and Slavic — about 190 names in total, with Indian and Sanskrit names well represented (a mix many Western generators miss). You can filter by any combination of origins, so multicultural families can explore one heritage at a time or blend several together.</p>
+</div>
+
+<div class="faq-item card p-5 cursor-pointer">
+  <div class="faq-q flex items-center justify-between gap-3 font-bold">
+    <span>Is my shortlist saved? Do I need an account?</span><span class="faq-chev">▾</span>
+  </div>
+  <p class="faq-a text-sm mt-3" style="color:#6B5340;">No account, no signup, no paywall — ever. Your shortlist is stored privately in your own browser's local storage, so it is there when you come back on the same device. Tap the heart on any name card to save it, and use the "Copy list" button to paste your favorites into a message to your partner or family. Everything runs 100% in your browser; no data ever leaves your device.</p>
+</div>
+
+<div class="faq-item card p-5 cursor-pointer">
+  <div class="faq-q flex items-center justify-between gap-3 font-bold">
+    <span>What is the "Name of the Day"?</span><span class="faq-chev">▾</span>
+  </div>
+  <p class="faq-a text-sm mt-3" style="color:#6B5340;">Every day, TotTales spotlights one name from the library — complete with its meaning, origin, and gender — as a little daily dose of naming inspiration. The pick is deterministic, so everyone visiting on the same date sees the same name, making it fun to share and discuss with your partner. If the day's name speaks to you, save it straight to your shortlist with one tap.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="mt-6" style="background:var(--cream); border-top:3px solid var(--line);">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm" style="color:#6B5340;">
+    <p>© 2026 <b style="color:var(--sage);">TotTales</b> — every name tells a story. 📖</p>
+    <p>Made with 💛 for expectant parents everywhere · <a href="https://fixoraa.tech" class="font-bold hover:underline" style="color:var(--rose-deep);">More Tools</a></p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the parent-name blender work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Enter two names and TotTales combines the opening syllables of one name with the ending syllables of the other at several split points, in both orders. Candidates are checked for pronounceability, scored for natural flow, and the best blends are shown with their recipe." }
+    },
+    {
+      "@type": "Question",
+      "name": "Are the name meanings accurate?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Every name in the TotTales library is a real, established name and each meaning reflects its widely accepted etymology. If a name's heritage is especially important to your family, verify with a native speaker or cultural source." }
+    },
+    {
+      "@type": "Question",
+      "name": "How does sibling-name matching work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "TotTales scores every name on family harmony: same cultural origin, same starting letter, same syllable rhythm, similar length, and matching ending sound, and shows the reasons for each suggestion." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which cultures and origins are covered?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ten origins are covered: Indian, Sanskrit, Arabic, Hebrew, Latin, Greek, Celtic, Japanese, African, and Slavic — about 190 names in total, with strong Indian and Sanskrit representation." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my shortlist saved? Do I need an account?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No account or signup is needed. Your shortlist is stored privately in your browser's local storage, and you can copy it to share with family." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Name of the Day?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Every day TotTales spotlights one name from the library with its meaning, origin, and gender as daily naming inspiration. The pick is the same for everyone on a given date." }
+    }
+  ]
+}
+</script>
+</body>
+</html>
